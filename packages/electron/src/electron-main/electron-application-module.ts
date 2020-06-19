@@ -20,7 +20,7 @@ import { ElectronSecurityToken } from '@theia/core/lib/electron-common/electron-
 import { ContainerModule } from 'inversify';
 import { v4 } from 'uuid';
 import { ElectronMainWindowService, electronMainWindowServicePath } from '../electron-common/electron-window-protocol';
-import { ElectronApplication, ElectronMainContribution } from './electron-application';
+import { ElectronApplication, ElectronMainContribution, ProcessArgv } from './electron-application';
 import { DefaultElectronMainWindowService } from './electron-window-service';
 import { ElectronMessagingContribution } from './messaging/electron-messaging-contribution';
 import { ElectronMessagingService } from './messaging/electron-messaging-service';
@@ -46,4 +46,6 @@ export default new ContainerModule(bind => {
         new JsonRpcConnectionHandler(electronMainWindowServicePath,
             () => context.container.get(ElectronMainWindowService))
     ).inSingletonScope();
+
+    bind(ProcessArgv).toSelf().inSingletonScope();
 });
